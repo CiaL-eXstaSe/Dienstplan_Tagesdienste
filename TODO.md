@@ -3,8 +3,6 @@
 Diese Datei hält die aktuellen Aufgaben rund um den Jahresdienstplan fest. Bitte hier ändern/ergänzen; ich halte sie mit meinem internen Aufgabenstand synchron.
 
 ## Offen / Geplant
-- [ ] validator-monthly-breakdown: Monatsweise Auswertung (Quoten, Lieblingstage, Folgetage)
-- [ ] validator-export-reports: Validierungsbericht zusätzlich als CSV/Markdown speichern
 - [ ] validator-thresholds-exitcodes: Schwellwerte/Regeln und Exit-Codes bei Abweichungen
 - [ ] scheduler-deterministic-seed: Deterministische Rotation per konfigurierbarem Seed
 - [ ] scheduler-min-gap-between-assignments: Mindestabstand N Arbeitstage konfigurierbar
@@ -15,6 +13,8 @@ Diese Datei hält die aktuellen Aufgaben rund um den Jahresdienstplan fest. Bitt
 - [ ] testing-suite-core: Unit-/Integrationstests (Parser, Quoten, Zuweiser)
 
 ## Erledigt
+- [x] validator-monthly-breakdown: Monatsweise Auswertung (Quoten, Lieblingstage, Folgetage)
+- [x] validator-export-reports: Validierungsbericht zusätzlich als CSV/Markdown speichern
 - [x] tests-versioning: Versionierung der Tests (Ordner, Schema, Changelog)
 - [x] snapshot-run-validator: Validator beim Snapshot ausführen und Bericht speichern
 

@@ -22,12 +22,12 @@ def timestamp_version() -> str:
 	return 'v' + datetime.now().strftime('%Y-%m-%d_%H%M%S')
 
 
-def run_validator(plan_path: str, test_path: str, report_path: str) -> None:
-	"""Runs the validator and writes stdout to report_path."""
+def run_validator(plan_path: str, test_path: str, report_path: str, out_dir: str) -> None:
+	"""Runs the validator and writes stdout to report_path; also writes CSV/MD to out_dir."""
 	try:
 		with open(report_path, 'w', encoding='utf-8') as fout:
 			proc = subprocess.run(
-				['python3', VALIDATOR, plan_path, test_path],
+				['python3', VALIDATOR, plan_path, test_path, '--out-dir', out_dir],
 				stdout=fout,
 				stderr=subprocess.STDOUT,
 				cwd=BASE_DIR,
@@ -81,6 +81,7 @@ def create_snapshot(version: str = None, note: str = '') -> str:
 			plan_path=os.path.join(version_dir, 'Jahresdienstplan_2026.csv'),
 			test_path=os.path.join(version_dir, 'Testdaten.csv'),
 			report_path=report_path,
+			out_dir=version_dir,
 		)
 		print(f'Validator-Bericht gespeichert: {report_path}')
 	else:
