@@ -1,0 +1,41 @@
+== Validierungsbericht ==
+Plan-Tage: 254
+Abteilungen: 9
+
+Keine harten Regelverstöße (Wochenende/Feiertag/Verhinderung/Wochentag) gefunden.
+
+Proportionalität (Ziel vs. Ist, diff=Ist-Ziel):
+- Abt 1: Ziel 37, Ist 37, Diff +0
+- Abt 2: Ziel 18, Ist 18, Diff +0
+- Abt 3: Ziel 22, Ist 22, Diff +0
+- Abt 4: Ziel 36, Ist 36, Diff +0
+- Abt 5: Ziel 18, Ist 18, Diff +0
+- Abt 6: Ziel 15, Ist 15, Diff +0
+- Abt 7: Ziel 36, Ist 36, Diff +0
+- Abt 8: Ziel 36, Ist 36, Diff +0
+- Abt 9: Ziel 36, Ist 36, Diff +0
+
+Folgetage je Abteilung (Anzahl benachbarter Zuweisungen):
+- Abt 1: 0
+- Abt 2: 0
+- Abt 3: 0
+- Abt 4: 0
+- Abt 5: 0
+- Abt 6: 0
+- Abt 7: 0
+- Abt 8: 0
+- Abt 9: 0
+
+Lieblingstage-Treffer:
+- Abt 1: 30/37
+- Abt 2: 14/18
+- Abt 3: 22/22
+- Abt 4: 31/36
+- Abt 5: 16/18
+- Abt 6: 9/15
+- Abt 7: 31/36
+- Abt 8: 36/36
+- Abt 9: 36/36
+
+
+[validator-exit-code]: 0
