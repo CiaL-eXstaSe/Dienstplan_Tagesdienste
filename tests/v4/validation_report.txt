@@ -1,0 +1,134 @@
+== Validierungsbericht ==
+Plan-Tage: 254
+Abteilungen: 40
+
+Keine harten Regelverstöße (Wochenende/Feiertag/Verhinderung/Wochentag) gefunden.
+
+Proportionalität (Ziel vs. Ist, diff=Ist-Ziel):
+- Abt 1: Ziel 9, Ist 9, Diff +0
+- Abt 2: Ziel 7, Ist 7, Diff +0
+- Abt 3: Ziel 5, Ist 5, Diff +0
+- Abt 4: Ziel 9, Ist 9, Diff +0
+- Abt 5: Ziel 4, Ist 4, Diff +0
+- Abt 6: Ziel 6, Ist 6, Diff +0
+- Abt 7: Ziel 8, Ist 8, Diff +0
+- Abt 8: Ziel 3, Ist 3, Diff +0
+- Abt 9: Ziel 9, Ist 9, Diff +0
+- Abt 10: Ziel 5, Ist 5, Diff +0
+- Abt 11: Ziel 9, Ist 9, Diff +0
+- Abt 12: Ziel 7, Ist 7, Diff +0
+- Abt 13: Ziel 5, Ist 5, Diff +0
+- Abt 14: Ziel 9, Ist 9, Diff +0
+- Abt 15: Ziel 4, Ist 4, Diff +0
+- Abt 16: Ziel 6, Ist 6, Diff +0
+- Abt 17: Ziel 8, Ist 8, Diff +0
+- Abt 18: Ziel 3, Ist 3, Diff +0
+- Abt 19: Ziel 9, Ist 9, Diff +0
+- Abt 20: Ziel 5, Ist 5, Diff +0
+- Abt 21: Ziel 8, Ist 8, Diff +0
+- Abt 22: Ziel 7, Ist 7, Diff +0
+- Abt 23: Ziel 5, Ist 5, Diff +0
+- Abt 24: Ziel 8, Ist 8, Diff +0
+- Abt 25: Ziel 4, Ist 4, Diff +0
+- Abt 26: Ziel 6, Ist 6, Diff +0
+- Abt 27: Ziel 8, Ist 8, Diff +0
+- Abt 28: Ziel 3, Ist 3, Diff +0
+- Abt 29: Ziel 8, Ist 8, Diff +0
+- Abt 30: Ziel 5, Ist 5, Diff +0
+- Abt 31: Ziel 8, Ist 8, Diff +0
+- Abt 32: Ziel 7, Ist 7, Diff +0
+- Abt 33: Ziel 5, Ist 5, Diff +0
+- Abt 34: Ziel 8, Ist 8, Diff +0
+- Abt 35: Ziel 4, Ist 4, Diff +0
+- Abt 36: Ziel 6, Ist 6, Diff +0
+- Abt 37: Ziel 8, Ist 8, Diff +0
+- Abt 38: Ziel 3, Ist 3, Diff +0
+- Abt 39: Ziel 8, Ist 8, Diff +0
+- Abt 40: Ziel 5, Ist 5, Diff +0
+
+Folgetage je Abteilung (Anzahl benachbarter Zuweisungen):
+- Abt 1: 0
+- Abt 2: 0
+- Abt 3: 0
+- Abt 4: 0
+- Abt 5: 0
+- Abt 6: 0
+- Abt 7: 0
+- Abt 8: 0
+- Abt 9: 0
+- Abt 10: 0
+- Abt 11: 0
+- Abt 12: 0
+- Abt 13: 0
+- Abt 14: 0
+- Abt 15: 0
+- Abt 16: 0
+- Abt 17: 0
+- Abt 18: 0
+- Abt 19: 0
+- Abt 20: 0
+- Abt 21: 0
+- Abt 22: 0
+- Abt 23: 0
+- Abt 24: 0
+- Abt 25: 0
+- Abt 26: 0
+- Abt 27: 0
+- Abt 28: 0
+- Abt 29: 0
+- Abt 30: 0
+- Abt 31: 0
+- Abt 32: 0
+- Abt 33: 0
+- Abt 34: 0
+- Abt 35: 0
+- Abt 36: 0
+- Abt 37: 0
+- Abt 38: 0
+- Abt 39: 0
+- Abt 40: 0
+
+Lieblingstage-Treffer:
+- Abt 1: 9/9
+- Abt 2: 7/7
+- Abt 3: 5/5
+- Abt 4: 9/9
+- Abt 5: 0/4
+- Abt 6: 6/6
+- Abt 7: 8/8
+- Abt 8: 3/3
+- Abt 9: 9/9
+- Abt 10: 5/5
+- Abt 11: 9/9
+- Abt 12: 7/7
+- Abt 13: 5/5
+- Abt 14: 9/9
+- Abt 15: 0/4
+- Abt 16: 6/6
+- Abt 17: 8/8
+- Abt 18: 3/3
+- Abt 19: 9/9
+- Abt 20: 5/5
+- Abt 21: 8/8
+- Abt 22: 7/7
+- Abt 23: 5/5
+- Abt 24: 8/8
+- Abt 25: 0/4
+- Abt 26: 6/6
+- Abt 27: 8/8
+- Abt 28: 3/3
+- Abt 29: 8/8
+- Abt 30: 5/5
+- Abt 31: 8/8
+- Abt 32: 7/7
+- Abt 33: 5/5
+- Abt 34: 8/8
+- Abt 35: 0/4
+- Abt 36: 6/6
+- Abt 37: 8/8
+- Abt 38: 3/3
+- Abt 39: 8/8
+- Abt 40: 5/5
+
+
+[validator-exit-code]: 0
