@@ -1,0 +1,20 @@
+== Validierungsbericht ==
+Plan-Tage: 254
+Abteilungen: 2
+
+Keine harten Regelverstöße (Wochenende/Feiertag/Verhinderung/Wochentag) gefunden.
+
+Proportionalität (Ziel vs. Ist, diff=Ist-Ziel):
+- Abt 1: Ziel 169, Ist 169, Diff +0
+- Abt 2: Ziel 85, Ist 85, Diff +0
+
+Folgetage je Abteilung (Anzahl benachbarter Zuweisungen):
+- Abt 1: 83
+- Abt 2: 0
+
+Lieblingstage-Treffer:
+- Abt 1: 0/169
+- Abt 2: 0/85
+
+
+[validator-exit-code]: 0
