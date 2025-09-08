@@ -98,3 +98,4 @@ Dienstplan_Tagesdienste/
 - Testdaten: `tests/v4/` und `tests/v5/` zeigen Probleme
 - Validator: Bereits implementiert, zeigt Ungleichheiten
 - Ziel: Gleichmäßige Verteilung über das gesamte Jahr
+

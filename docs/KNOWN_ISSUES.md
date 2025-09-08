@@ -90,3 +90,4 @@ python3 validate_plan.py tests/v4-repro/Jahresdienstplan_2026.csv tests/v4-repro
 2. **Kurz:** Monatliche Quoten statt nur Jahresquoten  
 3. **Mittel:** Stärkere Anti-Folgetag-Logik
 4. **Lang:** Algorithmus-Überarbeitung mit mathematischer Optimierung
+

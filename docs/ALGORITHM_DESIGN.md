@@ -160,3 +160,4 @@ const calculateGiniCoefficient = (assignments) => {
 3. **Mittel:** Globale Rotation über das Jahr
 4. **Lang:** Gini-Koeffizient und erweiterte Metriken
 5. **Zukunft:** Constraint-Solving oder Machine Learning
+
