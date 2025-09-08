@@ -82,7 +82,8 @@ def plot_consecutive_bars(consecutive_csv: str, out_dir: str) -> None:
 	# Spalten: Abteilung;Folgetage
 	df = df.sort_values('Folgetage', ascending=False)
 	plt.figure(figsize=(12, max(5, len(df) * 0.3)))
-	sns.barplot(data=df, x='Folgetage', y='Abteilung', palette='Reds')
+	# Verwendung von einheitlicher Farbe statt palette ohne hue, um FutureWarning zu vermeiden
+	sns.barplot(data=df, x='Folgetage', y='Abteilung', color='#d62728')
 	plt.title('Folgetage je Abteilung (benachbarte Arbeitstage)')
 	plt.xlabel('Anzahl Folgetage')
 	plt.ylabel('Abteilung')
@@ -97,7 +98,9 @@ def plot_q4_skew(q4_csv: str, out_dir: str) -> None:
 	# Spalten: Abteilung;Q4_Ist;Q4_Soll;Diff
 	df = df.sort_values('Diff', key=lambda s: s.abs(), ascending=False)
 	plt.figure(figsize=(12, max(5, len(df) * 0.3)))
-	sns.barplot(data=df, x='Diff', y='Abteilung', palette='coolwarm', hue=None)
+	# Eigene Farbliste je nach Vorzeichen statt palette ohne hue
+	colors = df['Diff'].apply(lambda v: '#d62728' if v > 0 else '#1f77b4').tolist()
+	plt.barh(df['Abteilung'], df['Diff'], color=colors)
 	plt.axvline(0, color='black', linewidth=0.8)
 	plt.title('Q4-Skew: Abweichung Okt–Dez (Ist - Soll) je Abteilung')
 	plt.xlabel('Diff (Ist - Soll)')
