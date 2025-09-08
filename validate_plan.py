@@ -119,6 +119,23 @@ def is_verhindert(a: Abteilung, d: date) -> bool:
 	return False
 
 
+def working_days_by_month_2026() -> Dict[int, List[date]]:
+	"""Gibt für 2026 eine Map {1..12: [arbeitstage im Monat]} zurück."""
+	holidays = set(berlin_holidays_2026())
+	monthly: Dict[int, List[date]] = {m: [] for m in range(1, 13)}
+	for month in range(1, 13):
+		# Tage im Monat
+		if month == 12:
+			days_in_month = 31
+		else:
+			days_in_month = (date(2026, month + 1, 1) - date(2026, month, 1)).days
+		for day in range(1, days_in_month + 1):
+			d = date(2026, month, day)
+			if is_weekday(d) and d not in holidays:
+				monthly[month].append(d)
+	return monthly
+
+
 def largest_remainder_targets(abteilungen: List[Abteilung], total_days: int) -> Dict[int, int]:
 	total_weight = sum(a.pensum for a in abteilungen)
 	if total_weight <= 0:
@@ -147,7 +164,7 @@ def write_csv(path: str, header: List[str], rows: List[List]):
 			w.writerow(r)
 
 
-def write_markdown_summary(path: str, total_days: int, violations: List[str], deviations: List[Tuple[int,int,int,int]], consecutive_counts: Dict[int,int], favorite_hits: Dict[int,int], counts: Dict[int,int], monthly: Dict[str, Dict[int, Dict[str,int]]]):
+def write_markdown_summary(path: str, total_days: int, violations: List[str], deviations: List[Tuple[int,int,int,int]], consecutive_counts: Dict[int,int], favorite_hits: Dict[int,int], counts: Dict[int,int], monthly: Dict[str, Dict[int, Dict[str,int]]], monthly_quota_dev: List[List], q4_skew: List[List]):
 	lines: List[str] = []
 	lines.append('# Validierungsbericht')
 	lines.append('')
@@ -185,6 +202,18 @@ def write_markdown_summary(path: str, total_days: int, violations: List[str], de
 		for num in sorted(monthly[month].keys()):
 			m = monthly[month][num]
 			lines.append(f'{month} | {num} | {m.get("ist",0)} | {m.get("fav",0)}')
+	lines.append('')
+	lines.append('## Monatsweise Soll/Ist-Quoten-Abweichung')
+	lines.append('Monat | Abteilung | Soll | Ist | Diff')
+	lines.append('---|---:|---:|---:|---:')
+	for row in monthly_quota_dev:
+		lines.append(f'{row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]:+d}')
+	lines.append('')
+	lines.append('## Q4-Skew (Ende-Jahr-Verteilung)')
+	lines.append('Abteilung | Q4 Ist | Q4 Soll | Diff')
+	lines.append('---|---:|---:|---:')
+	for row in q4_skew:
+		lines.append(f'{row[0]} | {row[1]} | {row[2]} | {row[3]:+d}')
 	with open(path, 'w', encoding='utf-8') as f:
 		f.write('\n'.join(lines))
 
@@ -255,7 +284,7 @@ def main(plan_csv: str, testdaten_csv: str, out_dir: Optional[str] = None) -> in
 			# Plan listet nur Arbeitstage; benachbarte Zeilen sind konsekutive Arbeitstage
 			consecutive_counts[cur_abt] = consecutive_counts.get(cur_abt, 0) + 1
 
-	# 5) Monatsweise Auswertung
+	# 5) Monatsweise Auswertung (Ist & Favoriten)
 	monthly: Dict[str, Dict[int, Dict[str, int]]] = {}
 	for d, weekday_name, abt_num in parsed_plan:
 		month_key = f"{d.year}-{d.month:02d}"
@@ -265,6 +294,36 @@ def main(plan_csv: str, testdaten_csv: str, out_dir: Optional[str] = None) -> in
 		a = abt_by_num.get(abt_num)
 		if a and weekday_name in a.lieblingstage:
 			monthly[month_key][abt_num]["fav"] += 1
+
+	# 6) Monatsweise Soll/Ist-Quoten (Checker)
+	monthly_days = working_days_by_month_2026()
+	monthly_quota_dev_rows: List[List] = []  # [Monat, Abteilung, Soll, Ist, Diff]
+	for month in range(1, 13):
+		mon_key = f"2026-{month:02d}"
+		days_in_month = len(monthly_days[month])
+		mon_targets = largest_remainder_targets(abteilungen, days_in_month)
+		for a in abteilungen:
+			ist = monthly.get(mon_key, {}).get(a.nummer, {}).get('ist', 0)
+			soll = mon_targets.get(a.nummer, 0)
+			diff = ist - soll
+			monthly_quota_dev_rows.append([mon_key, a.nummer, soll, ist, diff])
+
+	# 7) Q4-Skew (Ende-Jahr-Verteilung)
+	q4_months = {10, 11, 12}
+	q4_total_days = sum(len(monthly_days[m]) for m in q4_months)
+	q4_targets = largest_remainder_targets(abteilungen, q4_total_days)
+	q4_counts: Dict[int, int] = {}
+	for d, _, abt_num in parsed_plan:
+		if d.month in q4_months:
+			q4_counts[abt_num] = q4_counts.get(abt_num, 0) + 1
+	q4_skew_rows: List[List] = []  # [Abteilung, Q4 Ist, Q4 Soll, Diff]
+	for a in abteilungen:
+		ist = q4_counts.get(a.nummer, 0)
+		soll = q4_targets.get(a.nummer, 0)
+		diff = ist - soll
+		q4_skew_rows.append([a.nummer, ist, soll, diff])
+	# Sortiere zur besseren Sichtbarkeit nach größter Abweichung
+	q4_skew_rows.sort(key=lambda r: abs(r[3]), reverse=True)
 
 	# Bericht (stdout)
 	print("== Validierungsbericht ==")
@@ -293,6 +352,16 @@ def main(plan_csv: str, testdaten_csv: str, out_dir: Optional[str] = None) -> in
 	print("Lieblingstage-Treffer:")
 	for a in abteilungen:
 		print(f"- Abt {a.nummer}: {favorite_hits.get(a.nummer, 0)}/{counts.get(a.nummer, 0)}")
+	print()
+
+	print("Monatliche Soll/Ist-Abweichungen (Top 10 nach |Diff|):")
+	for row in sorted(monthly_quota_dev_rows, key=lambda r: abs(r[4]), reverse=True)[:10]:
+		print(f"- {row[0]} Abt {row[1]}: Soll {row[2]}, Ist {row[3]}, Diff {row[4]:+d}")
+	print()
+
+	print("Q4-Skew (Top 10 nach |Diff|):")
+	for row in q4_skew_rows[:10]:
+		print(f"- Abt {row[0]}: Q4 Soll {row[2]}, Ist {row[1]}, Diff {row[3]:+d}")
 
 	# Exporte
 	if out_dir:
@@ -303,15 +372,19 @@ def main(plan_csv: str, testdaten_csv: str, out_dir: Optional[str] = None) -> in
 		write_csv(os.path.join(out_dir, 'validation_consecutive.csv'), ['Abteilung', 'Folgetage'], [[a.nummer, consecutive_counts.get(a.nummer, 0)] for a in abteilungen])
 		# Favoriten CSV
 		write_csv(os.path.join(out_dir, 'validation_favorites.csv'), ['Abteilung', 'Treffer', 'Gesamt'], [[a.nummer, favorite_hits.get(a.nummer, 0), counts.get(a.nummer, 0)] for a in abteilungen])
-		# Monatsweise CSV
+		# Monatsweise CSV (Ist & Favoriten)
 		monthly_rows: List[List] = []
 		for month in sorted(monthly.keys()):
 			for num in sorted(monthly[month].keys()):
 				m = monthly[month][num]
 				monthly_rows.append([month, num, m.get('ist', 0), m.get('fav', 0)])
 		write_csv(os.path.join(out_dir, 'validation_monthly_summary.csv'), ['Monat', 'Abteilung', 'Ist', 'Favoriten'], monthly_rows)
+		# Monatsweise Soll/Ist-Quoten CSV
+		write_csv(os.path.join(out_dir, 'validation_monthly_quota_deviation.csv'), ['Monat', 'Abteilung', 'Soll', 'Ist', 'Diff'], monthly_quota_dev_rows)
+		# Q4-Skew CSV
+		write_csv(os.path.join(out_dir, 'validation_q4_skew.csv'), ['Abteilung', 'Q4_Ist', 'Q4_Soll', 'Diff'], q4_skew_rows)
 		# Markdown Summary
-		write_markdown_summary(os.path.join(out_dir, 'validation_summary.md'), total_days, violations, deviations, consecutive_counts, favorite_hits, counts, monthly)
+		write_markdown_summary(os.path.join(out_dir, 'validation_summary.md'), total_days, violations, deviations, consecutive_counts, favorite_hits, counts, monthly, monthly_quota_dev_rows, q4_skew_rows)
 
 	# Rückgabecode: 0 wenn keine harten Regelverstöße
 	return 0 if not violations else 2

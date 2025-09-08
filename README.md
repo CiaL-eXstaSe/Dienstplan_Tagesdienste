@@ -8,7 +8,7 @@
 - Versionierung von Testeingaben/-ausgaben mit Snapshots
 
 ### Nutzung der Web-App
-1. `dienstplan_generator.html` im Browser öffnen (Doppelklick genügt)
+1. `docs/index.html` im Browser öffnen (GitHub Pages) oder lokal öffnen
 2. Abteilungsdaten im Format eingeben:
 ```
 <Nummer>; <Pensum in %>; <Lieblingstage>; <Verhinderungen>
@@ -33,12 +33,18 @@ Ausführung:
 ```bash
 python3 validate_plan.py /Pfad/zu/Jahresdienstplan_2026.csv /Pfad/zu/Testdaten.csv --out-dir ./reports
 ```
-Ergebnisse:
+Ergebnisse (neu erweitert):
 - Konsolenbericht (Regelverstöße, Proportionalität, Folgetage, Lieblingstage)
-- In `--out-dir`: CSVs und `validation_summary.md` (monatsweise Übersicht)
+- Monatsweise Auswertung und zeitlicher Verteilungs-Checker:
+  - `validation_monthly_quota_deviation.csv` (Soll/Ist je Monat & Abteilung)
+  - `validation_q4_skew.csv` (Ende-Jahr-Skew: Okt–Dez Soll/Ist)
+- Weitere Exporte:
+  - `validation_proportionality.csv`, `validation_consecutive.csv`, `validation_favorites.csv`
+  - `validation_monthly_summary.csv` (Ist & Favoriten je Monat)
+  - `validation_summary.md` (Markdown-Zusammenfassung)
 
 ### Test-Snapshots (Versionierung)
-Automatisches Archivieren der aktuell im Hauptordner liegenden Dateien `Testdaten.csv` und `Jahresdienstplan_2026.csv` inkl. Validatorlauf.
+Automatisches Archivieren der aktuellen Dateien `Testdaten.csv` und `Jahresdienstplan_2026.csv` inkl. Validatorlauf und Exporte.
 
 Snapshot erstellen:
 ```bash
@@ -51,24 +57,24 @@ Versionen auflisten:
 python3 manage_tests.py list
 ```
 Ergebnis pro Version (z. B. `tests/v1/`):
-- `Testdaten.csv`
-- `Jahresdienstplan_2026.csv`
-- `metadata.json` (Zeitstempel/Kommentar)
-- `validation_report.txt`
-- CSV-Exporte und `validation_summary.md`
+- `Testdaten.csv`, `Jahresdienstplan_2026.csv`, `metadata.json`
+- `validation_report.txt` (Konsolen-Output)
+- CSV-/MD-Exporte inkl. monatlicher Quoten und Q4-Skew
 
 ### Projektstruktur (Auszug)
 ```
 Dienstplan_Tagesdienste/
-  ├─ dienstplan_generator.html   # Web-App (HTML/CSS/JS)
-  ├─ Testdaten.csv               # Aktuelle Eingaben
-  ├─ Jahresdienstplan_2026.csv   # Aktueller Export
-  ├─ validate_plan.py            # Validator (Python)
-  ├─ manage_tests.py             # Snapshots + Validatorlauf
-  ├─ tests/                      # Versionierte Tests
-  │   ├─ README.md, CHANGELOG.md
-  │   └─ v*/ (Snapshots mit Reports)
-  └─ TODO.md                     # Roadmap/Offene Punkte
+  ├─ docs/                    # Web-App & Projektdoku
+  │   ├─ index.html           # App (für GitHub Pages)
+  │   ├─ DEVELOPMENT_NOTES.md
+  │   ├─ KNOWN_ISSUES.md
+  │   └─ ALGORITHM_DESIGN.md
+  ├─ Testdaten.csv            # Aktuelle Eingaben
+  ├─ Jahresdienstplan_2026.csv# Aktueller Export
+  ├─ validate_plan.py         # Validator (Python)
+  ├─ manage_tests.py          # Snapshots + Validatorlauf
+  ├─ tests/                   # Versionierte Tests (mit Reports)
+  └─ TODO.md                  # Roadmap/Offene Punkte
 ```
 
 ### Roadmap / Offenes

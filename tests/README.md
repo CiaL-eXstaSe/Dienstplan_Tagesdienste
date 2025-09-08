@@ -7,6 +7,14 @@ Struktur:
   - Testdaten.csv
   - Jahresdienstplan_2026.csv (optional)
   - metadata.json (Zeitstempel, Kommentar)
+  - validation_report.txt (Konsolen-Output des Validators)
+  - validation_summary.md (Markdown-Zusammenfassung)
+  - validation_proportionality.csv (Ziel/Ist/Diff gesamt)
+  - validation_consecutive.csv (Folgetage je Abteilung)
+  - validation_favorites.csv (Lieblingstage-Treffer)
+  - validation_monthly_summary.csv (Ist & Favoriten je Monat)
+  - validation_monthly_quota_deviation.csv (Soll/Ist je Monat & Abteilung)
+  - validation_q4_skew.csv (Ende-Jahr-Skew: Okt–Dez Soll/Ist)
 
 Schnappschuss erstellen:
 

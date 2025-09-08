@@ -38,6 +38,8 @@ Clientseitige HTML-Anwendung zur Erstellung von Jahresdienstplänen für 2026 (B
 - Folgetage-Zählung
 - Lieblingstage-Treffer
 - Monatsweise Auswertung
+- Neu: Monatsweise Soll/Ist-Quoten (Largest-Remainder je Monat)
+- Neu: Q4-Skew-Analyse (Okt–Dez Soll/Ist vs. Verteilung)
 
 ## Test-Erkenntnisse
 
@@ -59,7 +61,7 @@ Clientseitige HTML-Anwendung zur Erstellung von Jahresdienstplänen für 2026 (B
 - [ ] validator-thresholds-exitcodes: Schwellwerte für Abweichungen
 
 ### Mittelfristig
-- **Zeitliche Fairness:** Monatliche Quoten statt nur Jahresquoten
+- **Zeitliche Fairness:** Monatliche Quoten statt nur Jahresquoten (Implementierung)
 - **Anti-Folgetag:** Stärkere Logik gegen aufeinanderfolgende Einsätze
 - **Gini-Koeffizient:** Fairness-Metrik implementieren
 
@@ -84,18 +86,19 @@ Dienstplan_Tagesdienste/
 ### Wichtige Funktionen
 - `generatePlan()`: Haupt-Algorithmus in HTML
 - `largest_remainder_targets()`: Quotenberechnung
+- `working_days_by_month_2026()`: Arbeitstage pro Monat
 - `run_validator()`: Automatische Validierung bei Snapshots
 
 ## Nächste Schritte
 
-1. **Sofort:** Zeitliche Fairness-Checker implementieren
-2. **Kurz:** Monatliche Quoten statt nur Jahresquoten
-3. **Mittel:** Erweiterte Testsuite mit automatisierten Szenarien
+1. **Kurz:** Monatliche Quoten als harte Leitplanken im Algorithmus testen
+2. **Mittel:** Erweiterte Testsuite mit automatisierten Szenarien
+3. **Mittel:** Stärkere Anti-Folgetag-Logik (Mindestabstand)
 4. **Lang:** Algorithmus-Überarbeitung mit mathematischer Optimierung
 
 ## Kontakt-Info für neue Chats
 - Hauptproblem: Ende-Jahr-Problem bei hohen Pensen
 - Testdaten: `tests/v4/` und `tests/v5/` zeigen Probleme
-- Validator: Bereits implementiert, zeigt Ungleichheiten
+- Validator: Bereits implementiert, inkl. Monatsquoten & Q4-Skew
 - Ziel: Gleichmäßige Verteilung über das gesamte Jahr
 

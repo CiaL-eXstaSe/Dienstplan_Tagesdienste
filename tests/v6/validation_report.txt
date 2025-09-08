@@ -1,0 +1,36 @@
+== Validierungsbericht ==
+Plan-Tage: 254
+Abteilungen: 2
+
+Keine harten Regelverstöße (Wochenende/Feiertag/Verhinderung/Wochentag) gefunden.
+
+Proportionalität (Ziel vs. Ist, diff=Ist-Ziel):
+- Abt 1: Ziel 169, Ist 169, Diff +0
+- Abt 2: Ziel 85, Ist 85, Diff +0
+
+Folgetage je Abteilung (Anzahl benachbarter Zuweisungen):
+- Abt 1: 83
+- Abt 2: 0
+
+Lieblingstage-Treffer:
+- Abt 1: 0/169
+- Abt 2: 0/85
+
+Monatliche Soll/Ist-Abweichungen (Top 10 nach |Diff|):
+- 2026-10 Abt 1: Soll 15, Ist 22, Diff +7
+- 2026-10 Abt 2: Soll 7, Ist 0, Diff -7
+- 2026-11 Abt 1: Soll 14, Ist 21, Diff +7
+- 2026-11 Abt 2: Soll 7, Ist 0, Diff -7
+- 2026-12 Abt 1: Soll 15, Ist 22, Diff +7
+- 2026-12 Abt 2: Soll 7, Ist 0, Diff -7
+- 2026-09 Abt 1: Soll 15, Ist 20, Diff +5
+- 2026-09 Abt 2: Soll 7, Ist 2, Diff -5
+- 2026-03 Abt 1: Soll 15, Ist 11, Diff -4
+- 2026-03 Abt 2: Soll 7, Ist 11, Diff +4
+
+Q4-Skew (Top 10 nach |Diff|):
+- Abt 1: Q4 Soll 43, Ist 65, Diff +22
+- Abt 2: Q4 Soll 22, Ist 0, Diff -22
+
+
+[validator-exit-code]: 0
