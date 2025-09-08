@@ -89,6 +89,21 @@ Dienstplan_Tagesdienste/
 - `working_days_by_month_2026()`: Arbeitstage pro Monat
 - `run_validator()`: Automatische Validierung bei Snapshots
 
+## Visualisierung
+- Skript: `visualize_reports.py`
+- Quellen:
+  - `validation_monthly_summary.csv` → Heatmap Ist je Monat/Abteilung
+  - `validation_monthly_quota_deviation.csv` → Heatmap Diff (Soll-Ist)
+  - `validation_q4_skew.csv` → Balken zu Ende-Jahr-Skew
+  - `validation_consecutive.csv` → Balken zu Folgetagen je Abteilung
+  - Plan-CSV → Wochentags-Heatmap
+
+Ausführung:
+```bash
+pip install -r requirements.txt
+python3 visualize_reports.py --dir tests/vX
+```
+
 ## Nächste Schritte
 
 1. **Kurz:** Monatliche Quoten als harte Leitplanken im Algorithmus testen

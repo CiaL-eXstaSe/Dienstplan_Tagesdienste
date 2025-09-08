@@ -43,6 +43,24 @@ Ergebnisse (neu erweitert):
   - `validation_monthly_summary.csv` (Ist & Favoriten je Monat)
   - `validation_summary.md` (Markdown-Zusammenfassung)
 
+### Visualisierung (Heatmaps & Diagramme)
+Zum schnellen Erkennen von Ungleichheiten aus den Validator-Reports.
+
+Setup:
+```bash
+pip install -r requirements.txt
+```
+Nutzung (z. B. für einen Snapshot in `tests/v6`):
+```bash
+python3 visualize_reports.py --dir tests/v6
+```
+Erzeugte Grafiken (im gleichen Ordner):
+- `heatmap_monthly_counts.png` (Ist-Einsätze je Monat/Abteilung)
+- `heatmap_monthly_quota_diff.png` (Soll/Ist-Diff je Monat/Abteilung)
+- `heatmap_weekday_distribution.png` (Wochentagsverteilung je Abteilung)
+- `bars_consecutive_by_department.png` (Folgetage je Abteilung)
+- `bars_q4_skew.png` (Ende-Jahr-Skew je Abteilung)
+
 ### Test-Snapshots (Versionierung)
 Automatisches Archivieren der aktuellen Dateien `Testdaten.csv` und `Jahresdienstplan_2026.csv` inkl. Validatorlauf und Exporte.
 
@@ -72,6 +90,7 @@ Dienstplan_Tagesdienste/
   ├─ Testdaten.csv            # Aktuelle Eingaben
   ├─ Jahresdienstplan_2026.csv# Aktueller Export
   ├─ validate_plan.py         # Validator (Python)
+  ├─ visualize_reports.py     # Visualisierung (Heatmaps/Charts)
   ├─ manage_tests.py          # Snapshots + Validatorlauf
   ├─ tests/                   # Versionierte Tests (mit Reports)
   └─ TODO.md                  # Roadmap/Offene Punkte

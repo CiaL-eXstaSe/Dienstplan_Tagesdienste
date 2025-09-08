@@ -23,6 +23,12 @@ python3 ../manage_tests.py snapshot --version v1 --note "Erster Snapshot"
 # Ohne --version wird automatisch ein Zeitstempel verwendet (z. B. v2025-08-27_1423)
 ```
 
+Visualisierung (Heatmaps/Charts) direkt aus einem Versionsordner erzeugen:
+```bash
+pip install -r ../requirements.txt
+python3 ../visualize_reports.py --dir ./v1
+```
+
 Hinweise:
 - Nutze sprechende Versionsnamen (z. B. vweights-rotation, vfavorites-tuned).
 - Pflege Änderungen zusätzlich in CHANGELOG.md in diesem Verzeichnis.
